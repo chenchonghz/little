@@ -17,7 +17,8 @@
 	function closeedit(){
 		$("#editor_out").hide();
 		$("#mask").hide();
-        $(document.body).css("overflow","scroll");		
+        $(document.body).css("overflow","scroll");
+        $("#code").hide();		
 	}
 
     function isFocus(e){
