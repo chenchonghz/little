@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<style>
+@charset "utf-8";
+/* CSS Document */
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+/*按钮样式*/
+
+#code {
+	width: 600px;
+	height: 500px;
+	background-color: #fff;
+	padding: 10px;
+	position: absolute;
+	display: none;
+	left: 45%;
+	z-index: 9999;
+}
+.close1 {
+	width: 300px;
+	height: 60px;
+}
+#closebt {
+	float: right;
+}
+.mask{       
+position: fixed ; top: 0px; filter: alpha(opacity=60); background-color: #777;     
+z-index: 1002; left: 0px;     
+opacity:0.5; -moz-opacity:0.5;     
+} 
+
+</style>
+
+
+
+
+
+    <title>完整demo</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+<script type="text/javascript" charset="utf-8" src="./jquery-3.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="./ue/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="./ue/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="./key.js"> </script>
+</head>
+
+<body>
+<div>
+<h1>完整demo</h1>
+<script id="editor" type="text/plain" style="width:100%;height:100%;"></script>
+</div>
+
+<div>
+    <button onclick="setContent('1111');">
+    setcontent</button>
+    	
+	<button onclick="createEditor();">createEditor</button>
+	
+	<button onclick="test();">
+    test</button>	
+</div>
+
+
+<div>
+	<button type="button" id="ClickMe" onclick="show_out();showMask();">点击显示弹窗遮罩</button>
+</div>
+
+<div id="code">
+	<div onclick="closeedit();">关闭</div>
+	<div>
+	  <script id="editor_out" type="text/plain" style="width:100%;height:300px;"></script>
+	</div>
+</div>
+<!--遮罩代码-->
+<div id="mask" class="mask"></div> 
+
+
+
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+<p>1111</p><br>
+
+
+</body>
+
+
+
+
+
+
+</html>
