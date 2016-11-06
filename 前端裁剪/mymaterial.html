@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>话题</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection"content="telephone=no, email=no" />
+    <link rel="stylesheet" href="css/reset.css" media="all">
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <link rel="stylesheet" href="js/swiper/swiper.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/viewport.js"></script>
+</head>
+<body>
+<!--头部-->
+<header>
+    <a href="" class="logoimg"><img src="images/logo1.png" alt="" class="logo"/></a>
+    <a href="" class="icon iconfont search fr">&#xe614;</a>
+</header>
+<!--头部end-->
+<!--主体内容-->
+<section class="containertp">
+    <div class="useface"><div class="box"><span class="pic"><img id="showImg" src="http://img.7y7.com/uploads/avatar/000/00/38/79_avatar_max.jpg" alt=""></span><span class="ft12">头像</span><i class="icon-jump iconfont" aria-hidden="true"></i><a class="btn_addPic" id="photoBtn" href="javascript:void(0);"><span>+</span><input id="inputImage" class="filePrew" accept="image/*" type="file" multiple=""></a></div></div>
+
+    <ul class="mytool">
+        <li><span class="fr"><input type="text" class="mytxt" value="" placeholder="黑白映画"></span><i class="gray6">昵称</i></li>
+        <li><span class="fr"><input type="text" class="mytxt" value="" placeholder="请选择性别"></span><i class="gray6">性别</i></li>
+        <li><span class="fr"><input type="text" class="mytxt" value="" placeholder="benbenlong008@163.com"></span><i class="gray6">邮箱</i></li>
+        <li><span class="fr"><input type="text" class="mytxt" value="" placeholder="世上晨曦，逝去不返~"><i class="icon-jump iconfont" aria-hidden="true"></i></span><i class="gray6">个人介绍</i></li>
+    </ul>
+    <a class="ico-btnsave" href="javascript:void(0);">保存</a>
+</section>
+<!--主体内容end-->
+<!--底部-->
+<footer>
+    <ul>
+        <li class="active"><a href=""><i class="icon iconfont">&#xe627;</i>广场</a></li>
+        <li><a href=""><i class="icon iconfont">&#xe621;</i>话题</a></li>
+        <li><a href=""><i class="icon iconfont">&#xe611;</i>发布</a></li>
+        <li><a href=""><i class="icon iconfont">&#xe636;</i>专题</a></li>
+        <li><a href=""><i class="icon iconfont">&#xe60d;</i>我的</a></li>
+    </ul>
+</footer>
+
+<div id="containerDiv">
+    <div class="row" id="imgEdit">
+         <div class="col-md-9">
+              <div class="img-container"><img src="" alt="Picture"></div>
+         </div>
+    </div>
+    <div class="row" id="actions">
+          <div class="col-md-9 docs-buttons">
+                 <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">取消</button>
+                 <button type="button" class="btn btn-primary" id="imgCutConfirm" data-method="getCroppedCanvas">确认</button>
+          </div>
+    </div>
+</div>
+<!--底部end-->
+<script src="js/jquery.js"></script>
+<script src="js/swiper/swiper.jquery.min.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript" src="js/cropper.js"></script>
+<script type="text/javascript" src="js/myCrop.js"></script>
+<script>
+var fileImg = "";
+$(document).ready(function(){
+    $(function(){
+    
+        $("#imgCutConfirm").bind("click",function(){
+             $("#containerDiv").hide();
+             $("#imgEdit").hide();
+             //$("#getCroppedCanvasModal").modal("hide");
+        })
+    });
+
+})
+</script>
+</body>
+</html>
