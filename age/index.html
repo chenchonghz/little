@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no,email=no" />
+<meta name="ML-Config" content="fullscreen=yes,preventMove=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>骨龄</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
+<script type="text/javascript" src="js/styleinterference.js"></script>
+<script type="text/javascript" src="js/key.js"></script>
+</head>
+
+<body>
+<audio id="music" src="images/professor.mp3" loop='loop' volume="1"></audio>
+<div id="loading" class="loading up"><i></i></div>
+<div class="wrap" id="ispage">
+	
+	<div id="xCont1">
+		<header><img src="images/logo_activity.png" alt=""/></header>
+		<div class="box bannerbar">
+			<img src="images/t_01.png" alt=""/>
+			<img src="images/t_02.png" alt=""/>
+		</div>
+		<ul class="box ren_ul">
+			<li><img src="images/people01.png" alt=""/></li>
+			<li><img src="images/people02.png" alt=""/></li>
+		</ul>
+		<div class="btnbox"><img src="images/btn01.png" alt="" class="preload pic btn" id="startBtn"></div>
+		<footer><img src="images/bg_01_bottom.png" alt=""/><p>本次活动由<span>叶义言儿童生成促进中心</span>和<span>乐哈网</span>联合打造<br />参与遗传身高预测有机会获得生长发育大礼包</p></footer>
+	</div>
+
+	<div id="xCont2">
+		<header>
+			<img src="images/rainbow.png" alt=""/>
+			<img src="images/t_03.png" alt=""/>
+		</header>
+		<ul class="box js_cont" id="ifrom">
+			<li class="top"></li>
+			<li><label>宝宝性别</label><input type="text" class="mytxt" id="mysex" value="" placeholder="选性别" readonly data-sex=""></li>
+			<li><label>出生日期</label><input type="text" class="mytxt" id="mybirthday" value="" placeholder="请选择生日" readonly data-year="" data-month="" data-date=""></li>
+			<li><label>现有身高</label><input type="number" class="mytxt" value="" placeholder="请填写"><label>cm</label></li>
+			<li><label>现有体重</label><input type="number" class="mytxt" value="" placeholder="请填写"><label>kg</label></li>
+			<li><label>爸爸身高</label><input type="number" class="mytxt" value="" placeholder="请填写"><label>cm</label></li>
+			<li><label>妈妈身高</label><input type="number" class="mytxt" value="" placeholder="请填写"><label>cm</label></li>
+			<li class="bottom"></li>
+		</ul>
+		<div class="btnbox"><img src="images/btn02.png" alt="" class="btn" id="measureBtn"/></div>
+		<footer>
+			<img src="images/bg_11_bottom.png" alt=""/>
+			<img src="images/bg_12_bottom.png" alt=""/>
+			<img src="images/people03.png" alt=""/>
+		</footer>
+	</div>
+
+	<div id="xCont3">
+		<header>
+			<img src="images/rainbow.png" alt=""/>
+			<img src="images/t_03.png" alt=""/>
+		</header>
+		<ul class="js_cont">
+			<li class="top"></li>
+			<li><img src="images/baby2.png" alt="" class="people04 woman"/>与同龄儿童相比</li>
+			<li><span>身高：<i>正常</i></span><span>体重：<i>正常</i></span></li>
+			<li class="bottom"></li>
+		</ul>
+		<img src="images/image_ruby.png" alt="" class="image_ruby"/>
+		<div class="box ruby_ul">
+			<p>本测评数据参考《世界卫生组织儿童生长发育标准》</p>
+			<ul class="js_cont">
+				<li class="top"></li>
+				<li><img src="images/t_04.png" alt=""/></li>
+				<li>综合身高、体重来看，您孩子的体型发育属于中等偏上的水平，生长发育良好，请保持观察。</li>
+				<li class="bottom"></li>
+			</ul>
+		</div>
+		<footer>
+			<img src="images/bg_21_bottom.png" alt=""/>
+			<img src="images/t_05.png" alt=""/>
+			<img src="images/t_06.png" alt=""/>
+			<img src="images/bg_22_bottom.png" alt=""/>
+			<img src="images/btn05.png" alt="" class="btn" id="seeBtn"/>
+		</footer>
+	</div>
+
+	<div id="xCont4">
+		<header>
+			<img src="images/rainbow.png" alt=""/>
+			<img src="images/t_07.png" alt=""/>
+		</header>
+		<ul class="js_cont">
+			<li class="top"></li>
+			<li class="special"><span>175cm</span><p>人的身高与遗传有很大关系，根据父母的身高可以在一定程度上预测出孩子未来能够达到的身高范围。</p></li>
+			<li><img src="http://p.jingyanben.com/avatar/2016/83abeab3e4cbca54.jpg" alt=""/><span>刘咩咩</span><span>孩子的遗传身高</span><span>182cm</span></li>
+			<li><img src="http://p.jingyanben.com/avatar/2016/83abeab3e4cbca54.jpg" alt=""/><span>问咩</span><span>孩子的遗传身高</span><span>175cm</span></li>
+			<li><img src="http://p.jingyanben.com/avatar/2016/83abeab3e4cbca54.jpg" alt=""/><span>段飞</span><span>孩子的遗传身高</span><span>162cm</span></li>
+			<li class="bottom"></li>
+		</ul>
+		<div class="btnbox"><p>比比谁家的孩子长得高</p><img src="images/btn03.png" alt=""/></div>
+		<footer>
+			<img src="images/people05.png" alt="" id="yeyan"/>
+			<img src="images/t_08.png" alt=""/>
+			<img src="images/file_voice.png" alt="" id="music_voice"/>
+			<img src="images/btn06.png" alt="" class="btn" id="drawBtn"/>
+		</footer>
+		<div class="layer_detail">
+			<ul class="js_cont">
+				<li class="top"></li>
+				<li><span>叶义言教授</span>，中国儿童骨龄评分法创制者，我国儿童生长发育权威，湘雅医院退休儿科教授、主任医师，享受国务院颁发政府特殊津贴，曾赴英国伦敦大学留学，师从国际儿童生长学开创人Tanner教授，是其唯一的中国弟子。现是叶义言儿科专家工作室和儿童生长促进中心的创办人之一和首席专家。获2014感动中国只感动湖南人物并唯一入围央视感动中国人物。</li>
+				<li class="bottom"></li>
+			</ul>
+			<a href="javascript:void(0);" class="btnClose"></a>
+		</div>
+	</div>
+
+	<div id="xCont5">
+		<header>
+			<img src="images/rainbow.png" alt=""/>
+			<img src="images/t_09.png" alt=""/>
+		</header>
+		<img src="images/gift_bag.png" alt=""/>
+		<ul class="js_cont">
+			<li class="top"></li>
+			<li><span>礼遇一：</span><p>骨龄检测<i>68元现金抵扣券</i></p></li>
+			<li><span>礼遇二：</span><p>由叶义言儿童生成促进中心免费提供的儿童生长发育水平评估<i>1次（价值198元）</i></p></li>
+			<li><span>礼遇三：</span><p>精美儿童礼品<i>1份</i></p></li>
+			<li class="bottom"></li>
+		</ul>
+		<ul class="js_contact">
+			<li><label>联系电话</label><input type="tel" class="mytxt" value="" placeholder="请填写"><input type="submit" id="btnVerify" value="获取验证码"></a></li>
+			<li><label>验证码</label><input type="text" class="mytxt" value="" placeholder="请填写"></li>
+			<li class="special"><div class="btnbox"><img src="images/btn04.png" id="btnGet" alt=""/></div></li>
+		</ul>
+		<footer>
+			<img src="images/erweima.jpg" alt=""/>
+			<img src="images/bg_01_bottom.png" alt=""/>
+		</footer>
+		<div class="layer_suc"><img src="images/ok.png" alt="" /></div>
+	</div>
+
+</div>
+<script type="text/javascript" src="js/jquery.1.8.3.min.js"></script>
+<script type="text/javascript" src="js/ioselect.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script type="text/javascript" src="js/popup.min.js"></script>
+<script type="text/javascript" src="js/default.js"></script>
+<script type="text/javascript">
+df.ready(function(){
+	df.dateData('#mybirthday',function(){console.log(100)});
+	df.sexData('#mysex',function(){console.log(100)});
+	$('#btnVerify').click(function(){df.verify($(this),'',10,true);});
+	$('#yeyan').click(function(){df.share_tips()});
+	$('#btnGet').click(function(){df.suc_tips()});
+})
+var mydf = {
+    _btn_music : null,
+    music : document.querySelector('#music'),
+
+    initMusicBtn:function(){
+        mydf._btn_music = $('#music_voice');
+        mydf._btn_music.on('click',function(){mydf.playOrpause();});
+    },
+    initMusic:function(){
+        mydf.music.paused;
+    },
+    playOrpause:function(){
+        if (!mydf.music) return;
+        if(mydf.music.paused){
+            mydf.music.play();
+        }else{
+            mydf.music.pause();
+            mydf.initMusicBtn();
+        }
+    }
+};
+mydf.initMusicBtn();
+
+</script>
+</body>
+</html>
