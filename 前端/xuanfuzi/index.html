@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <style type="text/css">
+        *{
+            font-family: '微软雅黑';
+            font-weight: bold;
+        }
+        .center{
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px red solid;
+            text-align: left;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var cc = new CircleCloud('circle');
+            cc.run();
+        };
+    </script>
+    <title>球</title>
+</head>
+<body>
+<div style="text-align: center">
+    <div class="center" id="circle">
+
+    </div>
+</div>
+</body>
+<script>
+/**
+ * Created by Administrator on 2014/6/21.
+ */
+var CircleCloud = function (id) {
+    var platform = document.getElementById(id);
+    var offsets = {
+        top : platform.offsetTop,
+        left : platform.offsetLeft,
+        width : platform.offsetWidth,
+        height : platform.offsetHeight
+    };
+    var point_status = {
+        front : 1,
+        behind : -1,
+        f2b : 2,
+        b2f : 3
+    };
+    var utils = {
+        addListener: function (e, eventName, func, useCapture) {
+            /*以W3C为标准*/
+            if (e && eventName) {
+                eventName = eventName.toLowerCase();
+                if (e.addEventListener)
+                    e.addEventListener(eventName, func, useCapture);
+                else if (e.attachEvent)
+                    e.attachEvent('on' + eventName, func);
+            }
+        },
+        switchToCoordinate: function (clientX, clientY) {
+            /*将页面上的像素点转换为坐标系对应的值*/
+            return {
+                X: clientX - offsets.left - offsets.width / 2,
+                Y: -(clientY - offsets.top - offsets.height / 2)
+            };
+        },
+        charLeft: function (c, str, len) {
+            if(str && c && len){
+                for(var i = 0 ; str.length < len ; i++)
+                    str = c + str;
+                return str;
+            }else
+                return null;
+        },
+        calculateZ: function (x, y, r) {
+            if (r * r - x * x > y * y)
+                return Math.pow((r * r - x * x - y * y), 1 / 2);
+            else
+                return 0;
+        },
+        calculateCSSColor: function (z, scolor, p_status) {
+            /*算出到屏幕的距离*/
+            var screenZ = +(p_status == point_status.front?r-z:z+r);
+            if(scolor && !scolor.indexOf('#')){
+                var cr = parseInt(scolor.substring(1,3),16),
+                    cg = parseInt(scolor.substring(3,5),16),
+                    cb = parseInt(scolor.substring(5),16),
+                    p = screenZ / (r << 1),
+                    max = 200;
+                var newR = Math.min(Math.round(cr + max * p), max),
+                    newG = Math.min(Math.round(cg + max * p), max),
+                    newB = Math.min(Math.round(cb + max * p), max);
+
+                return '#'+utils.charLeft('0',newR.toString(16),2)+
+                           utils.charLeft('0',newG.toString(16),2)+
+                           utils.charLeft('0',newB.toString(16),2);
+            }
+        },
+        calculateCSSFontSize: function (z, p_status) {
+            var screenZ = (p_status == point_status.front?r+z:r-z),
+                maxSize = 25,
+                minSize = 15;
+
+            return Math.round(minSize + (maxSize - minSize)*(screenZ / (r << 1))) + 'px';
+        }
+    };
+
+    var r = 0.8 * offsets.height/2/*环绕半径*/,
+        k = 0.03,/*速度比例参数*/
+        speed = 0/*速度*/,
+        tick = 30/*重新渲染周期，单位：ms*/,
+        vector = {X : 0, Y : 0},
+        default_color = '#00FF00',
+        point_info = new Array(),
+        point_list = [{text: '成吉思汗', margin_top: 250, margin_left: 276, point_status: point_status.front, color: '#00FFFF'},
+                      {text: '帖木儿', margin_top: 190, margin_left: 260, point_status: point_status.behind, color: '#CCCC00'},
+                      {text: '怯薛军', margin_top: 40, margin_left: 300, point_status: point_status.front, color: '#FF0033'},
+                      {text: '马其顿', margin_top: 110, margin_left: 140, point_status: point_status.behind, color: '#000066'},
+                      {text: '萨拉丁', margin_top: 300, margin_left: 180, point_status: point_status.behind, color: '#990066'},
+                      {text: '狮心王', margin_top: 260, margin_left: 400, point_status: point_status.behind, color: '#99CC33'},
+                      {text: '铁浮屠', margin_top: 210, margin_left: 410, point_status: point_status.front, color: '#0000FF'},
+                      {text: '拐子马', margin_top: 150, margin_left: 290, point_status: point_status.front, color: default_color}
+                      ];
+    
+    var draw = function () {
+        /*根据速度 获得下一个tick后的坐标*/
+        var copy_speed = +speed,
+            copy_vector = {X : vector.X, Y : vector.Y};
+        for(var t=0 ; t < point_info.length ; t++){
+            var newTop,newRight,newBottom,newLeft, p;
+
+            var point = utils.switchToCoordinate(offsets.left + point_info[t]['margin_left'] + point_info[t].self_width/2,
+                                                 offsets.top + point_info[t]['margin_top'] + point_info[t].self_height/2),
+                vp = utils.calculateZ(point['X'], point['Y'], r);
+
+            if(!vp) {
+                p = -point_info[t]['pre_p'];
+                point_info[t]['point_status'] *= -1;
+            }else
+                p = vp/r;
+            p *= point_info[t]['point_status'];
+
+            point_info[t]['margin_top'] = newTop = point_info[t]['margin_top'] - copy_vector['Y'] * k * p;
+            point_info[t]['margin_right'] = newRight = point_info[t]['margin_right'] - copy_vector['X'] * k * p;
+            point_info[t]['margin_bottom'] = newBottom = point_info[t]['margin_bottom'] + copy_vector['Y'] * k * p;
+            point_info[t]['margin_left'] = newLeft = point_info[t]['margin_left'] + copy_vector['X'] * k * p;
+            point_info[t]['pre_p'] = p;
+            point_info[t]['self']['margin'] = newTop + 'px ' + newRight + 'px ' + newBottom + 'px ' + newLeft + 'px';
+
+            var target = document.getElementById('text_'+t);
+            target.style.color = utils.calculateCSSColor(vp, point_info[t].color, point_info[t].point_status);
+            target.style.fontSize = utils.calculateCSSFontSize(vp, point_info[t].point_status);
+            target.style.margin = point_info[t]['self']['margin'];
+
+        }
+    };
+
+    var mouseHandler = {
+        mouseMove : function (e) {
+            vector = utils.switchToCoordinate(e.clientX, e.clientY);
+        },
+        mouseOut : function (e) {
+            /*鼠标移除后减速*/
+            var slowInterval = setInterval(function () {
+                if(vector.X == 0 && vector.Y == 0) {
+                    window.clearInterval(slowInterval);
+                }else{
+                    var newX = 0, newY = 0, cx = 10, cy = Math.abs(10*vector.Y/vector.X);
+                    if(Math.abs(vector.X) >= cx){
+                        if(vector.X > 0)
+                            newX = vector.X - cx;
+                        else
+                            newX = vector.X + cx;
+                    }
+
+                    if(Math.abs(vector.Y) >= cy){
+                        if(vector.Y > 0)
+                            newY = vector.Y - cy;
+                        else
+                            newY = vector.Y + cy;
+                    }
+                    vector = {X : newX, Y : newY};
+                }
+            }, tick * 3.0/*减速参数*/);
+        }
+    };
+
+    return {
+        run : function () {
+            if(platform){
+                /*添加鼠标事件*/
+                utils.addListener(platform,'mousemove',mouseHandler.mouseMove,false);
+                utils.addListener(platform,'mouseout',mouseHandler.mouseOut,false);
+
+                /*创建DOM内元素*/
+                for(var i=0 ; i < point_list.length ; i++){
+                    var new_span = document.createElement('span');
+                    new_span.innerHTML = point_list[i]['text'];
+                    new_span.setAttribute('id','text_'+i);
+                    new_span.setAttribute('class','text');
+                    new_span.setAttribute('style','position: absolute;');
+                    platform.appendChild(new_span);
+                }
+                /*初始化值*/
+                var texts = document.getElementsByClassName('text');
+                for(var i=0 ; i < texts.length ; i++){
+                    var info = {
+                        self : texts[i],
+                        self_height : texts[i].clientHeight,
+                        self_width : texts[i].clientWidth,
+                        self_id : texts[i]['id']
+                    };
+
+                    var the_point = point_list[+texts[i]['id'].split('_')[1]];
+                    info.margin_top = the_point.margin_top;
+                    info.margin_left = the_point.margin_left;
+                    info.margin_right = offsets.width - info.margin_left - info.self_width;
+                    info.margin_bottom = offsets.height - info.margin_top - info.self_height;
+                    info.point_status = the_point.point_status;
+                    info.color = the_point.color;
+                    point_info.push(info);
+
+                    texts[i].setAttribute('style','margin: '+info.margin_top+'px '+
+                                                             info.margin_right+'px '+
+                                                             info.margin_bottom+'px '+
+                                                             info.margin_left+'px;position: absolute;');
+
+                    var init_xy = utils.switchToCoordinate(offsets.left + info.margin_left + info.self_width/2,
+                                                         offsets.top + info.margin_top + info.self_height/2),
+                        z = utils.calculateZ(init_xy.X, init_xy.Y, r);
+                    texts[i].style.color = utils.calculateCSSColor(z, info.color, info.point_status);
+                    texts[i].style.fontSize = utils.calculateCSSFontSize(z, info.point_status);
+                }
+
+                setInterval(function () {
+                    draw();
+                },tick);
+            }
+        }
+    };
+}
+</script>
+</html>
