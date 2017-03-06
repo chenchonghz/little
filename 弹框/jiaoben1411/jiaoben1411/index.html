@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>jQuery模态窗口登陆效果 - 站长素材</title>
+  <link rel="stylesheet" type="text/css" media="all" href="style.css">
+  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/jquery.leanModal.min.js"></script>
+</head>
+
+<body>
+  <div id="w">
+    <div id="content">
+      <h1>Welcome to the Site!</h1>
+      <p>Just click the login link below to expand the modal window. This is only a demo so the input form will not load anything, but it is easy to connect into a backend system.</p>
+      <center><a href="#loginmodal" class="flatbtn" id="modaltrigger">Modal Login</a></center>
+    </div>
+  </div>
+  <div id="loginmodal" style="display:none;">
+    <h1>User Login</h1>
+    <form id="loginform" name="loginform" method="post" action="index.html">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" class="txtfield" tabindex="1">
+      
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" class="txtfield" tabindex="2">
+      
+      <div class="center"><input type="submit" name="loginbtn" id="loginbtn" class="flatbtn-blu hidemodal" value="Log In" tabindex="3"></div>
+    </form>
+  </div>
+<script type="text/javascript">
+$(function(){
+  $('#loginform').submit(function(e){
+    return false;
+  });
+  
+  $('#modaltrigger').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
+});
+</script>
+<div style="text-align:center;clear:both">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+</html>
