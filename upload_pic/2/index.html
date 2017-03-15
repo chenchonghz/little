@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>jQuery Upload Image</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="zh-CN" />
+	<!--<script type="text/javascript" src="jquery-1.6.2.min.js"></script>-->	<!-- 本地jquery库-->
+	<script type="text/javascript" src="./jquery-1.6.2.min.js"></script>
+</head>
+<body>
+<style>
+	#exec_target{display:none;width:0;height:0;}
+	#feedback{width:1200px;margin:0 auto;}
+	#feedback img{float:left;width:300px;height:300px;}	
+</style>
+
+<script>
+function fsubmit(){  
+        var data = new FormData($('#form1')[0]);  
+        $.ajax({  
+            url: 'server.php',  
+            type: 'POST',  
+            data: data,  
+            dataType: 'JSON',  
+            cache: false,  
+            processData: false,  
+            contentType: false  
+        }).done(function(ret){  
+            if(ret['isSuccess']){
+                  console.log(ret); 			
+                var result = '';  
+                result += 'name=' + ret['name'] + '<br>';  
+                result += 'gender=' + ret['gender'] + '<br>';  
+                result += '<img src="' + ret['photo']  + '" width="100">';  
+                $('#result').append(result);  
+            }else{  
+                alert('提交失敗');  
+            }  
+        });  
+        return false;  
+    }  
+ </script>
+
+ 
+ <form name="form1" id="form1">  
+        <p>name:<input type="text" name="name" ></p>  
+        <p>gender:<input type="radio" name="gender" value="1">male <input type="radio" name="gender" value="2">female</p>  
+        <p>photo:<input type="file" name="photo" id="photo"></p>  
+        <p><input type="button" name="b1" value="submit" onclick="fsubmit()"></p>  
+ </form>  
+ <div id="result"></div>  
+
+</body>
+</html>
